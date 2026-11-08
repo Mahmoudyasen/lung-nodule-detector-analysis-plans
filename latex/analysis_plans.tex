@@ -1,0 +1,104 @@
+% Pre-specified analysis plans of the paper. Compile with: pdflatex analysis_plans.tex (twice).
+% Parts B and C are generated word for word from the hashed Markdown files in ../plans_original/ by md2tex.py.
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,textcomp,amssymb}
+\usepackage{newunicodechar,seqsplit}
+\newunicodechar{−}{\ensuremath{-}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{α}{\ensuremath{\alpha}}
+\newunicodechar{≤}{\ensuremath{\le}}
+\newunicodechar{≥}{\ensuremath{\ge}}
+\newunicodechar{∈}{\ensuremath{\in}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{booktabs,tabularx,enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlist{nosep,leftmargin=*}
+\setlength{\parindent}{0pt}\setlength{\parskip}{4pt}
+\sloppy
+\hypersetup{pdftitle={Pre-specified analysis plans},pdfauthor={Mahmoud S. Yaseen and Ali Okatan}}
+
+\begin{document}
+
+{\LARGE\bfseries Pre-specified analysis plans\par}
+\vspace{4pt}
+Supplement to: \emph{How fragile a deep lung-nodule detector appears depends on the texture of simulated noise: a paired
+evaluation of training-time augmentation}\\[4pt]
+\textbf{Mahmoud S. Yaseen and Ali Okatan}\\
+Software Engineering Department, Istanbul Aydin University, Istanbul, Türkiye\\
+Correspondence: \href{mailto:mahmoudyaseen@stu.aydin.edu.tr}{mahmoudyaseen@stu.aydin.edu.tr}\\
+Code: \url{https://github.com/Mahmoudyasen/lung-nodule-detector-robustness}
+
+\section*{About this document}
+The analyses of the paper were fixed in three plans before the data they concern were generated or, for the first plan, before
+the pooled results were seen. This document gives all three:
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}l X p{3.3cm} l@{}}
+\toprule
+Part & Plan & Fixed & Evidence \\
+\midrule
+A & Families F1--F3 (blur, realistic noise, paired TCIA data), secondary analyses, descriptive NLST analysis &
+1 Nov 2026, 11:30 (rev.~1); 20:01 (rev.~2) & git commits \texttt{5d5bb18}, \texttt{0b2973e} \\
+B & Family F4: noise texture at equal level & 2 Nov 2026, 16:58 & SHA-256 record \\
+C & Families F5--F7: in-plane blur, noise level, real reconstruction kernels; second training seed & 2 Nov 2026, 20:31 &
+SHA-256 record \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+Times are local (UTC+3). Parts B and C reproduce the plan files word for word; only the layout was changed (Markdown
+converted to typeset text). The original files are in \texttt{plans\_original/} of this repository, and their SHA-256 hashes
+can be checked against the values recorded before any of their data were generated (the record files are in
+\texttt{hash\_records/}):
+
+\smallskip
+{\small
+\begin{tabularx}{\linewidth}{@{}l X l@{}}
+\toprule
+File & SHA-256 & Recorded \\
+\midrule
+\texttt{texture\_test\_prespec.md} (Part B) & \texttt{\seqsplit{7cf2ba56f78e1eb39c2d75cbf0b8d308b4141a13430300e129748ee264162da4}} & 2 Nov 2026, 16:58:38 \\
+\texttt{review\_prespec.md} (Part C) & \texttt{\seqsplit{edc7a8be4f3de8df1a1e0f5607220ab0be36fa71499d205c78c918c7384b99fe}} & 2 Nov 2026, 20:31:58 \\
+\bottomrule
+\end{tabularx}}
+
+\smallskip
+The record times are file times of the hash files written next to the analysis outputs on the first author's computer; like the git
+commit times of Part A, they are not external, notarised time stamps. Each plan is followed by notes written afterwards
+(``Notes''), which list deviations and analyses added after the data were seen; the paper labels these as not pre-specified.
+
+%% =========================================================================================================
+\clearpage
+\section*{Part A.\quad Plan for families F1--F3}
+This plan was kept in the first author's project progress document. Section~A.2 reproduces its final version (revision~2) word for
+word; only the layout was changed. Section~A.3 lists every difference from the earlier committed version.
+
+\input{part_A_body}
+
+%% =========================================================================================================
+\clearpage
+\section*{Part B.\quad Plan for family F4 (noise texture)}
+File \texttt{texture\_test\_prespec.md}, reproduced word for word.
+\input{gen_texture_test_prespec}
+
+\subsection*{Notes on Part B (written afterwards)}
+File \texttt{texture\_test\_prespec\_NOTES.md}, reproduced word for word.
+\input{gen_texture_test_prespec_NOTES}
+
+%% =========================================================================================================
+\clearpage
+\section*{Part C.\quad Plan for families F5--F7 and the second seed}
+File \texttt{review\_prespec.md}, reproduced word for word.
+\input{gen_review_prespec}
+
+\subsection*{Notes on Part C (written afterwards)}
+File \texttt{review\_prespec\_NOTES.md}, reproduced word for word.
+\input{gen_review_prespec_NOTES}
+
+\end{document}

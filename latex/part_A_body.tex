@@ -1,0 +1,90 @@
+\subsection*{A.1\quad Timeline and evidence}
+Times are local (UTC+3). ``Recorded'' means the time is stated in the plan text itself and has no independent record.
+Git commit times come from the first author's local repository; file times are file-system modification times of the result files.
+Neither is an external, notarised time stamp.
+
+\smallskip
+\begin{tabularx}{\linewidth}{@{}l X l@{}}
+\toprule
+Time & Event & Evidence \\
+\midrule
+30 Oct, 02:01 & Fold-0 results for the image-domain conditions written (seen before the plan was written) & file time \\
+30 Oct & Plan written; revision 1 the same day (projection-domain noise and NLST removed from the scope) & recorded \\
+1 Nov, 11:30:32 & Plan (revision 1) first committed & git \texttt{5d5bb18} \\
+1 Nov, 11:33 & Fold-1 inference starts (first output file for folds 1--3) & file time \\
+1 Nov, $\approx$18:35 & Revision 2 written (projection-domain noise and NLST restored) & recorded \\
+1 Nov, 20:00 & Pooled four-fold image-domain results written by the inference script & file time \\
+1 Nov, 20:01:45 & Revision 2 committed & git \texttt{0b2973e} \\
+2 Nov, 03:20 & First TCIA result file & file time \\
+2 Nov, 06:04 & First projection-domain-noise result file & file time \\
+2 Nov, 12:28 & NLST candidate file & file time \\
+2 Nov, 13:15 & Final statistics (\texttt{scripts/p2\_e1\_final.py}) & file time \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+Full commit hashes:\\
+\texttt{5d5bb180fb58d3cdc149e1e8d90843f9b73f3813} (revision 1)\\
+\texttt{0b2973ef4cfbdc7881048699bc5730a06ac3a4fb} (revision 2)
+
+\textbf{What the evidence shows.} F1, F3 and the correlated-noise part of F2 were committed before any result for folds 1--3
+existed. Revision~2 only added conditions for which no data existed yet: projection-domain noise to F2, and the NLST analysis.
+Revision~2 was committed about 1.5 minutes (85~s) after the pooled four-fold results were written. Its stated writing time (18:35) is earlier,
+but there is no independent record of it. Adding three comparisons to F2 made the Holm correction of the four correlated-noise
+comparisons stricter, not looser.
+
+\subsection*{A.2\quad The plan (revision 2, as committed)}
+\textbf{Fixed before the new data are scored.}
+Only fold 0 (image-domain conditions) has been seen. Everything below is fixed now and will be reported as planned, including
+null results. Revision (30 Oct, no new result seen): the projection-noise conditions were removed from family F2 and the NLST
+item was dropped, because tasks 2 and 4 left the paper; nothing else changed. \textbf{Revision 2 (1 Nov 2026, $\approx$ 18:35,
+while the E1 inference of fold 3 was still running; no pooled 4-fold, projection-noise or NLST result seen):} the full scope is
+restored, so the projection-domain conditions return to F2 and the NLST check returns as a descriptive secondary analysis
+(items 2, 3 and 5 below); nothing else changed.
+
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{Effect measure.} $\Delta$CPM = CPM(S4) $-$ CPM(S3) on identical perturbed images (paired). LUNA16: pooled over the
+four test folds (356 scans, each scan scored by its own fold's models). Resampling unit: the scan (LUNA16), the patient (TCIA).
+Paired bootstrap, 10,000 resamples; 95\,\% percentile CIs; two-sided P = 2\,$\cdot$\,min(P*($\Delta \le 0$), P*($\Delta \ge 0$)).
+\item \textbf{Primary families}, Holm correction within each family at $\alpha$ = 0.05:
+\textbf{F1 kernel}: soft $\sigma$ 1.0, soft $\sigma$ 1.5, soft 1.0 + white 60 HU.
+\textbf{F2 realistic noise}: correlated 40/80 HU at 0.7/1.4 mm grain (4) and projection-domain noise at 50 / 25 / 10\,\% of
+the TCIA reference (screening) dose (3); 7 comparisons. The projection-noise model (reference I0, tube-current-modulation fit,
+noise filter per kernel class, slice-thickness scaling) is fixed on TCIA before any LUNA16 projection-noise scan is scored; it is
+accepted if its held-out per-slice noise-SD error is clearly below that of a constant tube current (pilot, 3 cases: 17\,\% vs
+37\,\%), otherwise the result is reported and the model revised, still before scoring.
+\textbf{F3 TCIA}: the difference in degradation, $\Delta\Delta$ = [CPM$_\mathrm{S4}$(10\,\%) $-$ CPM$_\mathrm{S4}$(full)]
+$-$ [CPM$_\mathrm{S3}$(10\,\%) $-$ CPM$_\mathrm{S3}$(full)], and $\Delta$CPM at 10\,\%; each averaged over the four fold-model
+pairs (replicate models on the same 49 patients, not independent samples), bootstrap over patients with all eight models scored
+on the same resample; primary set as defined above (49 patients, 34 lesions).
+\item \textbf{Secondary} (reported, unadjusted, labelled exploratory): white noise 20--100 HU (expected null; equivalence margin
+$\pm$0.02 CPM), sharper kernels, sensitivity at 1/8 FP/scan, per-fold sign consistency of $\Delta$CPM, TCIA solid lesions only,
+results by vendor and kernel of the original LUNA16 scan.
+\item \textbf{NLST (descriptive, secondary, no P values)}: S3 and S4 of fold 0 on the fixed stratified sample (1,955 series, one
+per patient, seed 0, exclusions applied); candidates per scan and score distributions at the frozen threshold, by vendor
+$\times$ kernel class $\times$ round; S4 $-$ S3 differences with bootstrap 95\,\% CIs over patients. NLST has no nodule
+coordinates, so no sensitivity is claimed.
+\item \textbf{``White noise is not a dose test''} is shown descriptively: CPM drop from clean under white 80 HU vs correlated
+80 HU, with paired CIs; no separate test.
+\item \textbf{Fixed choices that are not tuned on test data:} score threshold 0.02 and max 100 candidates/scan (as frozen); the
+TCIA primary set and the handling of the unresolved lesions (above).
+\end{enumerate}
+
+\textbf{TCIA primary set} (``defined above'' in item 2; same section of the progress document, same commit).
+Fixed rule (simplified 30 Oct, instead of recovering the slices by hand): a lesion with an unknown slice is left out of the
+reference, and any detection within its radius in-plane, at any slice, is ignored (the LUNA16 ``excluded finding'' rule applied
+as a column), so it counts neither as a hit nor as a false positive; patient C128 is excluded entirely because its position
+error could affect both lesions. Primary set: 49 patients, 34 lesions (22 solid, 12 subsolid; diameter 5.4--25.1 mm, median
+8.0 mm).
+
+\subsection*{A.3\quad Changes between the committed versions}
+Revision 1 (\texttt{5d5bb18}) differs from revision 2 (\texttt{0b2973e}) only in: (i) the heading and the sentence on revision~2;
+(ii) F2 was ``\textbf{F2 correlated noise}: correlated 40/80 HU at 0.7/1.4 mm grain (4).'' (no projection-domain conditions);
+(iii) item 4 (NLST) was absent. The plan text was not changed after revision~2 (identical in commit \texttt{20403ab}, 2 Nov).
+
+\subsection*{A.4\quad Terms used in the paper}
+``Kernel'' in this plan means the Gaussian blur and unsharp masking applied to the images; the paper calls them blur and
+sharpening, and keeps ``kernel'' for real reconstruction kernels. ``Soft $\sigma$ 1.0 / 1.5'' are in voxels (0.70 / 1.05 mm
+in-plane). ``E1'' is the image-domain perturbation test. S3 and S4 are the models without and with augmentation.
+Analyses added after this plan are labelled as not pre-specified in the paper.
+
