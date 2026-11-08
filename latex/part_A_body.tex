@@ -88,3 +88,13 @@ sharpening, and keeps ``kernel'' for real reconstruction kernels. ``Soft $\sigma
 in-plane). ``E1'' is the image-domain perturbation test. S3 and S4 are the models without and with augmentation.
 Analyses added after this plan are labelled as not pre-specified in the paper.
 
+
+\subsection*{A.5\quad Deviations from this plan (noted 8 Nov 2026)}
+\textbf{Sensitivity at 1/8 FP/scan (item 3, secondary) was not reported.} The evaluation script computed it as a point
+estimate for S3 and S4 in the pooled image-domain conditions, but the paired bootstrap of the S4 $-$ S3 difference was run
+for the CPM only, and the sensitivity was not computed for the projection-domain noise or the TCIA data. When this omission
+was found (8 Nov 2026, after all results had been seen), the authors decided to record it here as a deviation rather than to
+add the analysis to the paper. The CPM, which is the mean of the sensitivities at seven operating points including
+1/8 FP/scan, is reported for every condition. The point estimates are part of the derived results, which are available
+from the corresponding author on request.
+All other items of this plan are reported in the paper.

@@ -36,8 +36,8 @@ The record times are file times on the first author's computer, not external tim
 
 The `*_NOTES.md` files were written after the data were seen; they list deviations and added analyses, which the paper
 labels as not pre-specified. Part A (F1–F3) was kept in the first author's project progress document; its committed versions and their
-times are given in Part A of the PDF.
+times are given in Part A of the PDF, and its deviations in Section A.5.
 
 ## Licence
 
-[To be chosen by the author, e.g. CC BY 4.0 for the documents.]
+See `LICENSE`.
