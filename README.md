@@ -37,6 +37,11 @@ The `*_NOTES.md` files were written after the data were seen; they list deviatio
 labels as not pre-specified. Part A (F1–F3) was kept in the first author's project progress document; its committed versions and their
 times are given in Part A of the PDF, and its deviations in Section A.5.
 
+## Repository history
+
+This repository was re-created on 16 November 2026 because of technical issues. The full commit history,
+including the plan files and hash records, was preserved unchanged; the commit dates are those of the original commits.
+
 ## Licence
 
 See `LICENSE`.
