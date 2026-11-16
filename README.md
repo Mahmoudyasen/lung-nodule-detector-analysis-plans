@@ -1,6 +1,6 @@
 # Pre-specified analysis plans
 
-Analysis plans for the paper *At equal level, simulated noise texture strongly affects how fragile a deep lung-nodule detector appears, with or without training-time augmentation* by Mahmoud S. Yaseen and Ali Okatan (Software Engineering
+The Analysis plans for the paper *At equal level, simulated noise texture strongly affects how fragile a deep lung-nodule detector appears, with or without training-time augmentation* by Mahmoud S. Yaseen and Ali Okatan (Software Engineering
 Department, Istanbul Aydin University, Istanbul, Türkiye). Correspondence: mahmoudyaseen@stu.aydin.edu.tr
 
 Code: https://github.com/Mahmoudyasen/lung-nodule-detector-robustness
